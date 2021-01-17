@@ -9,23 +9,7 @@ on:
         require: true
 
 jobs:
-  fork_build:
-    runs-on: ubuntu-latest
-    name: Test branch build
-
-    steps:
-          
-      - name: Checkout ${{ github.event.inputs.branch_target }}
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.inputs.branch_target }}
-
-      - name: Push
-        run: | 
-          git push ${{ github.event.inputs.git_push_args }} origin ${{ github.event.inputs.branch_target }}
-          exit $?
-
-  build-windows:
+  fork-build:
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -54,4 +38,3 @@ jobs:
         with:
           name: CxbxReloaded-${{ matrix.configuration }}-${{ matrix.vsver }}
           path: artifacts/bin/**
-
