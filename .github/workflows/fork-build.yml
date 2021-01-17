@@ -10,7 +10,7 @@ on:
 
 jobs:
   fork-build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
@@ -22,20 +22,13 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch_target }}
           submodules: recursive
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0.x
-
       - name: Generate cmake files
         run: |
           mkdir build && cd build
-          cmake ..
-        #-A Win32
+          cmake .. -A Win32
       - name: Build
         working-directory: build
-        run: cmake --build . --config ${{ matrix.configuration }} #-j $env:NUMBER_OF_PROCESSORS
+        run: cmake --build . --config ${{ matrix.configuration }} -j $env:NUMBER_OF_PROCESSORS
       - name: Prepare artifacts
         if: matrix.configuration == 'Release'
         working-directory: build
