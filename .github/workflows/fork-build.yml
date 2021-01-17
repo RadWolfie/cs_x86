@@ -31,7 +31,7 @@ jobs:
       fail-fast: false
       matrix:
         configuration: [Release, Debug]
-        vsver: VS2019
+        vsver: [VS2019]
     steps:
       - name: Checkout ${{ github.event.inputs.branch_target }}
         uses: actions/checkout@v2
