@@ -36,5 +36,5 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: matrix.configuration == 'Release'
         with:
-          name: CxbxReloaded-${{ matrix.configuration }}-${{ matrix.vsver }}
+          name: cs-x86-windows
           path: artifacts/bin/**
